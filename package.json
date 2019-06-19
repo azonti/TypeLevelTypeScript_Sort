@@ -1,0 +1,9 @@
+{
+  "name": "typeleveltypescript_sort",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {
+    "typescript": "^3.5.2"
+  },
+  "license": "MIT"
+}
