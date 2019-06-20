@@ -9,13 +9,13 @@ interface Suc_Nat extends Suc<Nat> {}
 type _0 = { is0: True }
 type Suc<N extends Nat> = { is0: False; pre: N }
 
-// is0: Is N 0?
-type is0<N extends Nat> = N["is0"]
+// Is0: Is N 0?
+type Is0<N extends Nat> = N["is0"]
 
 // LE: Is N less than or equal to M?
 type LE<N extends Nat, M extends Nat> =
   N extends Suc<infer Pre_N> ? M extends Suc<infer Pre_M> ?
-  { f: LE<Pre_N, Pre_M> }[is0<M>] : False : True
+  { f: LE<Pre_N, Pre_M> }[Is0<M>] : False : True
 
 
 // Lst: List of natural numbers
@@ -24,17 +24,17 @@ interface Cons_Nat_Lst extends Cons<Nat, Lst> {}
 type MTLst = { isMT: True }
 type Cons<N extends Nat, L extends Lst> = { isMT: False; fst: N; rst: L }
 
-// isMT: Is L empty?
-type isMT<L extends Lst> = L["isMT"]
+// IsMT: Is L empty?
+type IsMT<L extends Lst> = L["isMT"]
 
 // Ins: Insert N into L in order
 type Ins<N extends Nat, L extends Lst> =
   L extends Cons<infer Fst_L, infer Rst_L> ? LE<N, Fst_L> extends False ?
-  { f: Cons<Fst_L, Ins<N, Rst_L>> }[isMT<L>] : Cons<N, L> : Cons<N, L>
+  { f: Cons<Fst_L, Ins<N, Rst_L>> }[IsMT<L>] : Cons<N, L> : Cons<N, L>
 
 // Sort: Sort L
 type Sort<L extends Lst> =
-  L extends Cons<infer Fst_L, infer Rst_L> ? { f: Ins<Fst_L, Sort<Rst_L>> }[isMT<L>] : L
+  L extends Cons<infer Fst_L, infer Rst_L> ? { f: Ins<Fst_L, Sort<Rst_L>> }[IsMT<L>] : L
 
 type _1 = Suc<_0>
 type _2 = Suc<_1>
